@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Vue</title>
+</head>
+<body>
+<!--이벤트 발생시 함수 호출하는 방법-->
+<div id="app1">
+    <p>{{str}}</p>
+    <button v-on:click="reverseStr">문자열 뒤집기</button>
+    <button @click="reverseStr">문자열 뒤집기</button>
+</div>
+<script>
+    new Vue({
+        el:'#app1',
+        data:{
+            str : "Vue를 이용한 이벤트 처리처리기철이"
+        },
+        methods:{
+            reverseStr : function(){
+                this.str = this.str.split('').reverse().join('');
+            }
+        }
+    });
+</script>
+
+<hr/>
+<div id="app2">
+
+    <!-- v-show : 객체를 숨기거나 보여줌. 스타일 시트의 display와 같은 효과가 주어짐-->
+    <!--적용 객체가 Vue의 객체 내에 있어야 한다.-->
+    <!-- v-show="true" , v-show="false" v-show="status"-->
+    <button  v-show="status">v-show를 이용한 화면 숨김 처리하기</button>
+
+    <template v-show="false">
+        템플릿 태그 기본이 보이지 않는 것이다.
+    </template>
+</div>
+<script>
+    new Vue({
+        el: "#app2",
+        data: {
+            status: false
+        }
+    });
+</script>
+
+
+<hr>
+<div id="app3">
+    <!--
+        v-if : if의 값이 true일때 객체가 화면에 보임
+        v-else : false일때 보이지 않음
+    -->
+    <button v-if="showState" @click="domChange">클릭하세요</button>
+    <div v-else v-on:click="domChange">새로나온 내용...</div>
+
+</div>
+
+<script>
+    new Vue({
+        el: "#app3",
+        data: {
+            showState: true
+        },
+        methods:{
+                domChange:function(){
+                    this.showState=!this.showState;
+                }
+        }
+    });
+</script>
+
+<hr>
+<!--
+    template을 이용하여 if문 사용하기
+-->
+
+<div id="app4">
+
+
+    <template v-if="showState">
+        <button v-on:click="domChange">Click..꽃</button>
+        <ul>
+            <li>바나나</li>
+            <li>사과</li>
+            <li>딸기</li>
+        </ul>
+    </template>
+
+    <template v-else>
+        <button v-on:click="domChange">Click..과일</button>
+        <ul>
+            <li>코스모스</li>
+            <li>벚꽃</li>
+            <li>해바라기</li>
+        </ul>
+    </template>
+
+</div>
+
+<script>
+    new Vue({
+        el: "#app4",
+        data: {
+            showState: true
+        },
+        methods:{
+            domChange:function(){
+                this.showState=!this.showState;
+            }
+        }
+    });
+</script>
+
+
+</body>
+</html>
